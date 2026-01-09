@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>User Dashboard</h2>
+<form action="{{ url_for('main.submit_request') }}" method="POST">
+    <input type="text" name="request_text" placeholder="Enter request">
+    <button type="submit">Submit</button>
+</form>
+<h3>My Requests</h3>
+<ul>
+    {% for req in requests %}
+    <li>{{ req.text }} - {{ req.status }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

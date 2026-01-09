@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BDD App</title>
+</head>
+
+<body>
+    <header>
+        {% if session.get('user') %}
+        <span>Welcome, {{ session['user'] }}</span>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% endif %}
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>
