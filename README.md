@@ -1,41 +1,27 @@
-# LLM-Assisted BDD Functional Testing - Sample Web Application
+# LLM-Assisted BDD Functional Testing – Sample Web Application
 
 ## Overview
 
-This project demonstrating a complete BDD (Behavior-Driven Development) pipeline for a Flask web application. It features a unique **LLM-assisted scenario generation** capability where Gherkin test scenarios are automatically generated from plain-English business requirements.
+This project demonstrates an LLM-assisted Behavior-Driven Development (BDD) testing workflow for a sample web application.  
+The system bridges the gap between plain-English business requirements and automated functional testing while ensuring correctness through validation and human approval.
 
-**Note:** To ensure reliability and avoid external API dependency issues (quotas, billing), the project currently uses a **Mock LLM Client**. This validates the architectural pattern of LLM integration without requiring an active API key, while preserving the exact same data flow and validation logic.
+The workflow:
+- Converts business requirements into Gherkin (Given–When–Then) scenarios
+- Validates generated scenarios
+- Requires manual approval before automation
+- Executes only selected “happy path” scenarios using Playwright BDD
+
+To avoid dependency on public API quotas and billing, the project currently uses a **Mock / In-house LLM implementation**.  
+The architecture is production-ready and can be easily extended to use a real LLM.
 
 ---
 
-## Architecture
+## Problem Statement
 
-## High-Level Architecture
+Manual creation of BDD scenarios is time-consuming, error-prone, and requires technical expertise.  
+There is a need for a system that can automatically generate BDD scenarios from business requirements, validate them, and selectively automate critical test flows while keeping humans in control.
 
-```mermaid
-flowchart TD
-
-U[User / Test Runner]
-U --> SG[Scenario Generation]
-
-SG --> LLM[LLM Engine<br/>(Mock / In-house)]
-LLM --> G[Gherkin Scenarios]
-
-G --> V[Validation Layer]
-
-V -->|Invalid| R[Refine Requirements]
-V -->|Valid| A[Manual Approval]
-
-A -->|Rejected| R
-A -->|Approved| F[Approved Feature File]
-A --> AR[Approval Record]
-
-F --> HP[Happy Path Selection]
-HP --> BDD[BDD Test Execution]
-BDD --> PW[Playwright Automation]
-PW --> APP[Web Application]
-
-```
+---
 
 ### Component Breakdown
 
