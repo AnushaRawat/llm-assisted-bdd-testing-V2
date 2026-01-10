@@ -16,24 +16,25 @@ This project demonstrating a complete BDD (Behavior-Driven Development) pipeline
 flowchart TD
 
 U[User / Test Runner]
+U --> SG[Scenario Generation]
 
-U --> SG[Scenario Generation Module]
-SG --> LLM[Mock / In-house LLM]
-LLM --> G[Generated Gherkin Scenarios]
+SG --> LLM[LLM Engine<br/>(Mock / In-house)]
+LLM --> G[Gherkin Scenarios]
 
 G --> V[Validation Layer]
-V -->|Failed| R[Reject & Refine Requirements]
-V -->|Passed| A[Manual Approval]
 
-A -->|Approved| F[Gherkin Feature File]
-A --> AR[Approval Record]
-
-F --> HP[Happy Path Selector]
-HP --> BDD[BDD Test Runner]
-BDD --> PW[Playwright Automation]
-PW --> APP[Sample Web Application]
+V -->|Invalid| R[Refine Requirements]
+V -->|Valid| A[Manual Approval]
 
 A -->|Rejected| R
+A -->|Approved| F[Approved Feature File]
+A --> AR[Approval Record]
+
+F --> HP[Happy Path Selection]
+HP --> BDD[BDD Test Execution]
+BDD --> PW[Playwright Automation]
+PW --> APP[Web Application]
+
 ```
 
 ### Component Breakdown
