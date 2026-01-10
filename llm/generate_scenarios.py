@@ -5,7 +5,7 @@ import json
 import hashlib
 from datetime import datetime
 from pathlib import Path
-from llm.llm_client import generate_gherkin
+from llm_client import generate_gherkin
 
 def validate_gherkin(content: str) -> tuple[bool, list[str]]:
     errors = []
@@ -55,7 +55,7 @@ def main():
     print("Generating Gherkin scenarios from requirements...")
     print("-" * 60)
     
-    # Call LLM client(now mocked)
+    # Call LLM client
     try:
         gherkin_content = generate_gherkin(requirements_text)
     except Exception as e:
@@ -107,7 +107,7 @@ def main():
         "feature_file": output_file,
         "approved": True,
         "content_hash": compute_hash(gherkin_content),
-        "generator": "mock_llm_client" 
+        "generator": "openai_llm_client" 
     }
     
     with open(approval_file, 'w') as f:

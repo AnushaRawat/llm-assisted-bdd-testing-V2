@@ -10,31 +10,30 @@ This project demonstrating a complete BDD (Behavior-Driven Development) pipeline
 
 ## Architecture
 
-### High-Level Architecture
+## High-Level Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                                                          User/Test Runner                                                                         │
-└───────────┬───────────────────────────────┬─────────────────┘
-                               │                                                                                 │
-                               ▼                                                                                ▼
-         ┌────────────────┐                                        ┌──────────────┐
-         │ Scenario Gen                    │                                        │ Happy Path                 │
-         │ (generate_                        │                                        │                  Runner       │
-         │  scenarios.py)                   │                                        │ (run_happy_ paths.py) │
-         └───────┬────────┘                                        │                                     │
-                              │                                                               └───────┬──────┘
-                              ▼                                                                                   │
-    ┌────────────────┐                                                                 ▼
-    │ Mock LLM Client              │                                                 ┌──────────────┐
-    │ (llm_client.py)                   │                                                 │    pytest-bdd               │
-    └───────┬────────┘                                                 └───────┬──────┘
-                         │                                                                                             │
-                         ▼                                                                                            ▼
-    ┌────────────────┐                                                 ┌──────────────┐
-    │ Gherkin File                       │           ◄─────────────┤Playwright                    │
-    │ (.feature)                           │                                                 │ Automation                │
-    └────────────────┘                                                 └──────────────┘
+```mermaid
+flowchart TD
+
+U[User / Test Runner]
+
+U --> SG[Scenario Generation Module]
+SG --> LLM[Mock / In-house LLM]
+LLM --> G[Generated Gherkin Scenarios]
+
+G --> V[Validation Layer]
+V -->|Failed| R[Reject & Refine Requirements]
+V -->|Passed| A[Manual Approval]
+
+A -->|Approved| F[Gherkin Feature File]
+A --> AR[Approval Record]
+
+F --> HP[Happy Path Selector]
+HP --> BDD[BDD Test Runner]
+BDD --> PW[Playwright Automation]
+PW --> APP[Sample Web Application]
+
+A -->|Rejected| R
 ```
 
 ### Component Breakdown

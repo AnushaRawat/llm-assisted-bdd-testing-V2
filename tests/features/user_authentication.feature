@@ -16,3 +16,4 @@ Feature: User Authentication
     And I click the "Login" button
     Then I should see "Invalid credentials"
     And I should remain on the "Login" page
+
