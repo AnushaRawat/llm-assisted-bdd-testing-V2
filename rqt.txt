@@ -3,4 +3,3 @@ pytest
 pytest-bdd
 playwright
 pytest-asyncio
-python-dotenv

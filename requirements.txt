@@ -1,25 +1,5 @@
-## User Authentication Requirements
-
-### REQ-AUTH-001: User Login
-Description: The system shall allow registered users to login using their username and password.
-
-Acceptance Criteria:
-- User must provide both username and password
-- System validates credentials against stored user data
-- Upon successful login, user is redirected to dashboard
-- Upon successful login, user session is created
-- If credentials are invalid, system displays error message "Invalid credentials"
-- Login page is accessible to non-authenticated users only
-
-Test Credentials:
-- Valid user: username "user", password "pass"
-- Valid admin: username "admin", password "admin"
-
-### REQ-AUTH-002: User Logout
-Description: The system shall allow authenticated users to logout and end their session.
-
-Acceptance Criteria:
-- Logout link is visible to authenticated users
-- Upon logout, user session is destroyed
-- User is redirected to login page after logout
-- After logout, protected pages are not accessible without re-authentication
+Users should be able to log in using their username and password.
+Only admin should be able to access the admin panel.
+If a user enters invalid login credentials, an error message should be displayed.
+Users should be able to submit a new request from the dashboard.
+Normal users should not be able to access the admin panel.
